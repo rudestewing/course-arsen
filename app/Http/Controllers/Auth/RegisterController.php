@@ -41,6 +41,11 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        return abort(403);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,6 +54,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        return abort(403);
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
