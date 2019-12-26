@@ -22,6 +22,7 @@
     <link href="{{ asset('vendor/DataTables/datatables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/fontawesome/css/all.min.css') }}" rel="stylesheet">
 
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -85,7 +86,10 @@
     <script type="text/javascript" src="{{ asset('vendor/DataTables/datatables.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('table.datatable-client-side').DataTable();
+            $('table.datatable-client-side').DataTable({
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                displayLength: -1,
+            });
         });
     </script>
 </body>
