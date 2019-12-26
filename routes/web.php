@@ -23,8 +23,3 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/course/{folderName?}', 'CourseController@index')->name('course.index')->where('folderName', '(.*)');
     Route::get('/storage/{path}', 'StorageController@access')->name('storage.access')->where('path', '(.*)');
 });
-
-
-Route::get('/password', function() {
-    return \Hash::make('susujandam4h4L');
-});

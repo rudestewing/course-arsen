@@ -27,8 +27,8 @@
             @foreach ($directories as $dir)
                 <tr>
                     <td> 
-                        <a href="{{route('course.index', ['folderName' => $dir->string])}}"> <i class="far fa-folder"></i> {{$dir->string}} </a>    
-                        {{-- <a href="{{route('course.index', ['folderName' => $dir->string])}}"> <i class="far fa-folder"></i>  {{ $folderName != '' ? optional(explode($folderName.'/', $dir->string))[1] : $dir->string }} </a>     --}}
+                        {{-- <a href="{{route('course.index', ['folderName' => $dir->string])}}"> <i class="far fa-folder"></i> {{str_replace('/', ' / ', $dir->string)}} </a>     --}}
+                        <a href="{{route('course.index', ['folderName' => $dir->string])}}"> <i class="far fa-folder"></i>  {{ $folderName != '' ? optional(explode($folderName.'/', $dir->string))[1] : $dir->string }} </a>    
                     </td>
                     <td> {{$dir->size}} </td>
                     <td> Dir </td>
