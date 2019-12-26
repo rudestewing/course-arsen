@@ -14,7 +14,8 @@ class CourseController extends Controller
         $files = count($files) ? collect($files)->map(function($item) {
             return (object) [
                 'string' => $item,
-                'size' => $this->convertFilesize(\Storage::disk('local')->size($item), 2)
+                'size' => $this->convertFilesize(\Storage::disk('local')->size($item), 2),
+                'lastModified' => \Storage::disk('local')->lastModified($item)
             ];
         }) : [];
 
@@ -22,37 +23,49 @@ class CourseController extends Controller
             return (object) [
                 'string' => $item,
                 'size' => $this->convertFilesize($this->countSizeInsideDir($item), 2),
-                'totalFiles' => count(\Storage::disk('local')->files($item)),
-                'totalDirs' => count(\Storage::disk('local')->directories($item)),
+                // 'totalFiles' => count(\Storage::disk('local')->files($item)),
+                // 'totalDirs' => count(\Storage::disk('local')->directories($item)),
+                'lastModified' => \Storage::disk('local')->lastModified($item)
             ];
         }) : [];
 
-        $exploded = explode('/', $folderName);
-        $paths = $this->generatePaths($exploded);
+        $paths = $folderName != '' ? $this->generatePaths($folderName) : [];
 
         return view('course.index', compact('files', 'directories', 'folderName', 'paths'));
     }
 
-    private function generatePaths($array): array
+    private function generatePaths($string): array
     {
         $paths = [];
-        $count = count($array) - 1;
-        foreach($array as $item) {
+        
+        $exploded = explode('/', $string);
+        $count = count($exploded);
+   
+        for($i = 0; $i < $count+1; $i++) {
+            $newArray = [];
+            for ($j=0; $j < $i; $j++) { 
+                $newArray[] = $exploded[$j];
+            }
 
-            // $dir = ''; 
-            // for ($i=$count; $i > $count ; $i--) { 
-            //     $dir .= '/'
-            // }
-            
-            $paths[] = [
-                'dir' => $count,
-                'name' => $item
+            $newArray = array_filter($newArray);
+            $paths[] = (object) [
+                'path' => implode('/', $newArray),
+                'name' => count($newArray) > 0 ? $newArray[count($newArray)-1] : 'home'
             ];
-            
-            $count--;
         }
 
         return $paths;
+    }
+
+    private function asdf($array, $num) 
+    {
+        $newArray = [];
+        for ($i=0; $i < $num; $i++) { 
+            $newArray[] = $array[$i];
+        }
+
+        return $newArray;
+
     }
 
     private function countSizeInsideDir($dir)
