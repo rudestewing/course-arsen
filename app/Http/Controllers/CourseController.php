@@ -8,13 +8,13 @@ class CourseController extends Controller
 {
     public function index($folderName = '')
     {
-        $files = (\Storage::disk('public')->files($folderName));
-        $directories = \Storage::disk('public')->directories($folderName);
+        $files = (\Storage::disk('local')->files($folderName));
+        $directories = \Storage::disk('local')->directories($folderName);
         
         $files = count($files) ? collect($files)->map(function($item) {
             return (object) [
                 'string' => $item,
-                'size' => $this->convertFilesize(\Storage::disk('public')->size($item), 2)
+                'size' => $this->convertFilesize(\Storage::disk('local')->size($item), 2)
             ];
         }) : [];
 

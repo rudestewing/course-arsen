@@ -37,7 +37,8 @@
             @foreach ($files as $file)
                 <tr>
                     <td> 
-                        <a target="_blank" href="{{asset('storage/'.$file->string)}}"> <i class="fas fa-file"></i> {{ $folderName != '' ? optional(explode($folderName.'/', $file->string))[1] : $file->string }} </a>    
+                        {{-- <a target="_blank" href="{{asset('storage/'.$file->string)}}"> <i class="fas fa-file"></i> {{ $folderName != '' ? optional(explode($folderName.'/', $file->string))[1] : $file->string }} </a>     --}}
+                        <a target="_blank" href="{{route('storage.access', $file->string)}}"> <i class="fas fa-file"></i> {{ $folderName != '' ? optional(explode($folderName.'/', $file->string))[1] : $file->string }} </a>    
                     </td>
                     <td> {{$file->size}} </td>
                     <td> File </td>
