@@ -28,7 +28,7 @@
                 <tr>
                     <td> 
                         {{-- <a href="{{route('course.index', ['folderName' => $dir->string])}}"> <i class="far fa-folder"></i> {{str_replace('/', ' / ', $dir->string)}} </a>     --}}
-                        <a href="{{route('course.index', ['folderName' => $dir->string])}}"> <i class="far fa-folder"></i>  {{ $folderName != '' ? optional(explode($folderName.'/', $dir->string))[1] : $dir->string }} </a>    
+                        <a href="{{route('course.index', ['folderName' => $dir->string])}}"> <i class="far fa-folder"></i>  {{ $folderName != '' ? optional(explode($folderName.'/', $dir->string))[1] : $dir->string }} <small> ( <i class="far fa-folder"></i> {{$dir->totalDirs}} | <i class="fas fa-file"></i> {{$dir->totalFiles}} ) </small> </a>    
                     </td>
                     <td> {{$dir->size}} </td>
                     <td> Dir </td>

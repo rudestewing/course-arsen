@@ -22,6 +22,8 @@ class CourseController extends Controller
             return (object) [
                 'string' => $item,
                 'size' => $this->convertFilesize($this->countSizeInsideDir($item), 2),
+                'totalFiles' => count(\Storage::disk('local')->files($item)),
+                'totalDirs' => count(\Storage::disk('local')->directories($item)),
             ];
         }) : [];
 
