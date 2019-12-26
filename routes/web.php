@@ -12,12 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('course.index');
 });
+Route::get('/home', function() {
+    return redirect()->route('course.index');
+})->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/course/{folderName?}', 'CourseController@index')->name('course.index')->where('folderName', '(.*)');
