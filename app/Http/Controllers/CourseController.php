@@ -6,17 +6,11 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function index()
-    {
-        $courses = \Storage::disk('public')->directories();
-        
-        return view('course.index', compact('courses'));
-    }
-
-    public function show($folderName)
+    public function index($folderName = '')
     {
         $files = \Storage::disk('public')->files($folderName);
-
-        return view('course.show', compact('files'));
+        $directories = \Storage::disk('public')->directories($folderName);
+        
+        return view('course.index', compact('files', 'directories', 'folderName'));
     }
 }

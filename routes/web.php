@@ -20,8 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function() {
-    Route::get('/course', 'CourseController@index')->name('course.index');
-    Route::get('/course/show/{folderName}', 'CourseController@show')->name('course.show');
+    Route::get('/course/{folderName?}', 'CourseController@index')->name('course.index')->where('folderName', '(.*)');
 });
 
 Route::get('/password', function() {
