@@ -58,8 +58,8 @@ class CourseController extends Controller
     private function countSizeInsideDir($dir)
     {
         $size = 0;
-        foreach(\Storage::disk('public')->allFiles($dir) as $item) {
-            $size += \Storage::disk('public')->size($item);
+        foreach(\Storage::disk('local')->allFiles($dir) as $item) {
+            $size += \Storage::disk('local')->size($item);
         }
         return $size;
     }
