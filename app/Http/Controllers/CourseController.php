@@ -34,6 +34,12 @@ class CourseController extends Controller
         return view('course.index', compact('files', 'directories', 'folderName', 'paths'));
     }
 
+    public function show($string)
+    {
+        $mime = $mime = \Storage::disk('local')->mimeType($string);
+        return view('course.show', compact('string', 'mime'));
+    }
+
     private function generatePaths($string): array
     {
         $paths = [];

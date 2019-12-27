@@ -23,5 +23,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function() {
     Route::get('/course/{folderName?}', 'CourseController@index')->name('course.index')->where('folderName', '(.*)');
+    Route::get('show-course/{string}', 'CourseController@show')->name('course.show')->where('string', '(.*)');
     Route::get('/storage/{path}', 'StorageController@access')->name('storage.access')->where('path', '(.*)');
+    Route::get('/download-storage/{path}', 'StorageController@download')->name('storage.download')->where('path', '(.*)');
 });
